@@ -1586,7 +1586,12 @@ private def check_required_hardware() {
                 }
             }
 
-            rh = rh.findAll { !found_rh.contains(it) }
+            for (k=0;k < s;k++){
+                required_board = rh[0]
+                if(found_rh.contains(required_board)){
+                    rh.remove(required_board)
+                }
+            }
 
             gauntEnv.boards = filtered_board_list
             gauntEnv.agents = filtered_agent_list
