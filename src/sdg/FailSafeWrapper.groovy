@@ -21,11 +21,14 @@ class FailSafeWrapper {
         this.isRequisite = isRequisite
         this.nextDelegate = nextDelegate
     }
-    def invokeMethod(String name, args) {
-        if (name == 'maximumNumberOfParameters')
-            return delegate.maximumNumberOfParameters
+
+    def maximumNumberOfParameters() {                                                                                                                                                                                                   
+      return delegate.maximumNumberOfParameters                                                                                                                                                                                       
+    }                 
+                                                                                                                                                                                                                      
+    def call(Object... args) {
         try{
-            delegate.invokeMethod(name, args)
+            delegate.call(*args)
         }catch(NominalException ex){
             unstable("Stage is unstable. Reason: ${ex.getMessage()}")
             if (isRequisite == true){
@@ -34,7 +37,7 @@ class FailSafeWrapper {
         }catch (Exception ex){
             if (nextDelegate) {
                 try {
-                    nextDelegate.invokeMethod(name, args)
+                    nextDelegate.call(*args)
                 }catch (Exception ex_d){
                     echo "Delegated stage failed. Error ${ex_d.getMessage()}"
                 }
