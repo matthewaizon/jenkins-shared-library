@@ -1817,7 +1817,10 @@ private def install_libiio() {
         def scmVars = checkout([
             $class : 'GitSCM',
             branches : [[name: isBranch ? "*/${gauntEnv.libiio_branch}" : "refs/tags/${gauntEnv.libiio_branch}"]],
-            extensions: [[$class: 'LocalBranch', localBranch: "**"]],
+            extensions: [
+                [$class: 'LocalBranch', localBranch: "**"]
+                // ,[$class: 'PruneStaleBranch']
+                ],
             userRemoteConfigs: [[credentialsId: '', url: "${gauntEnv.libiio_repo}"]]
         ])
         stepExecutor.sh 'mkdir -p build'
@@ -1850,7 +1853,10 @@ private def install_telemetry(update_requirements=false){
         def scmVars = checkout([
             $class : 'GitSCM',
             branches : [[name: "*/${gauntEnv.telemetry_branch}"]],
-            extensions: [[$class: 'LocalBranch', localBranch: "**"]],
+            extensions: [
+                [$class: 'LocalBranch', localBranch: "**"]
+                // ,[$class: 'PruneStaleBranch']
+                ],
             userRemoteConfigs: [[credentialsId: '', url: "${gauntEnv.telemetry_repo}"]]
         ])
         if (update_requirements){
