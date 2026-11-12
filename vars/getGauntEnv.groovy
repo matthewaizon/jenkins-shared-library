@@ -64,6 +64,8 @@ private def call(hdlBranch, linuxBranch, bootPartitionBranch,firmwareVersion, bo
             pyadi_iio_branch: 'main',
             libad9361_iio_repo: 'https://github.com/analogdevicesinc/libad9361-iio.git',
             libad9361_iio_branch : 'main',
+            libad9166_iio_repo: 'https://github.com/analogdevicesinc/libad9361-iio.git',
+            libad9166_iio_branch : 'main',
             nebula_repo: 'https://github.com/sdgtt/nebula.git',
             nebula_branch: 'master',
             libiio_repo: 'https://github.com/analogdevicesinc/libiio.git',
